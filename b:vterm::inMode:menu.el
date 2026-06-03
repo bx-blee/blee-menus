@@ -99,7 +99,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:copy-mode|define ()
   (car `(
-         [,(format "vterm-copy-mode  [C-c C-t]  -- Toggle Copy Mode")
+         [,(format "Toggle Copy Mode  -- vterm-copy-mode  [C-c C-t]")
           (vterm-copy-mode (if (bound-and-true-p vterm-copy-mode) -1 1))
           :help "Toggle vterm copy mode (read-only) for searching and copying text (C-c C-t)"
           ]
@@ -107,7 +107,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:copy-mode-done|define ()
   (car `(
-         [,(format "vterm-copy-mode  [Enter]  -- Copy Selection & Exit Copy Mode")
+         [,(format "Copy Selection & Exit Copy Mode  -- vterm-copy-mode  [Enter]")
           (vterm-copy-mode-done nil nil)
           :active (bound-and-true-p vterm-copy-mode)
           :help "In copy mode: copy selected text and exit copy mode (Enter)"
@@ -118,7 +118,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:clear-scrollback|define ()
   (car `(
-         [,(format "vterm-clear-scrollback  [C-c C-l]  -- Clear Scrollback")
+         [,(format "Clear Scrollback  -- vterm-clear-scrollback  [C-c C-l]")
           (vterm-clear-scrollback)
           :help "Remove non-visible scrollback buffer data (C-c C-l)"
           ]
@@ -126,7 +126,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:next-prompt|define ()
   (car `(
-         [,(format "vterm-next-prompt  [C-c C-n]  -- Jump to Next Prompt")
+         [,(format "Jump to Next Prompt  -- vterm-next-prompt  [C-c C-n]")
           (vterm-next-prompt 1)
           :help "Move point to end of next shell prompt (C-c C-n)"
           ]
@@ -134,7 +134,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:previous-prompt|define ()
   (car `(
-         [,(format "vterm-previous-prompt  [C-c C-p]  -- Jump to Previous Prompt")
+         [,(format "Jump to Previous Prompt  -- vterm-previous-prompt  [C-c C-p]")
           (vterm-previous-prompt 1)
           :help "Move point to end of previous shell prompt (C-c C-p)"
           ]
@@ -142,7 +142,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:beginning-of-line|define ()
   (car `(
-         [,(format "vterm-beginning-of-line  [C-a]  -- Go to Beginning of Line")
+         [,(format "Go to Beginning of Line  -- vterm-beginning-of-line  [C-a]")
           (vterm-beginning-of-line)
           :help "Move to first character after prompt, or line start if already there (C-a in copy mode)"
           ]
@@ -152,7 +152,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:send-interrupt|define ()
   (car `(
-         [,(format "vterm-send-C-c  [C-c C-c]  -- Send Interrupt (C-c)")
+         [,(format "Send Interrupt (C-c)  -- vterm-send-C-c  [C-c C-c]")
           (vterm-send-C-c)
           :help "Send keyboard interrupt (C-c) to the terminal process (C-c C-c)"
           ]
@@ -160,7 +160,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:send-next-key|define ()
   (car `(
-         [,(format "vterm-send-next-key  -- Send Next Key to Terminal")
+         [,(format "Send Next Key to Terminal  -- vterm-send-next-key")
           (vterm-send-next-key)
           :help "Send the next key pressed directly to the terminal (useful for Emacs keys like C-g)"
           ]
@@ -170,7 +170,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:rename-buffer|define ()
   (car `(
-         [,(format "rename-buffer  -- Rename vterm Buffer")
+         [,(format "Rename vterm Buffer  -- rename-buffer")
           (rename-buffer (read-string "New buffer name: " (buffer-name)) t)
           :help "Rename the current vterm buffer"
           ]
@@ -178,7 +178,7 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
 (defun b:vterm:inMode:menuItem:kill-buffer|define ()
   (car `(
-         [,(format "kill-buffer  -- Kill vterm Buffer")
+         [,(format "Kill vterm Buffer  -- kill-buffer")
           (kill-buffer (current-buffer))
           :help "Kill the current vterm buffer and its process"
           ]
@@ -189,27 +189,27 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 (defun b:vterm:inMode:menuItem:config-submenu|define ()
   `(,(format "Configuration")
     :help "vterm configuration variables"
-    [,(format "Set vterm-shell  -- Change Shell Executable")
+    [,(format "Change Shell Executable  -- Set vterm-shell")
      (customize-variable 'vterm-shell)
      :help "Set the shell executable used by vterm (vterm-shell)"
      ]
-    [,(format "Set vterm-max-scrollback  -- Set Scrollback Limit")
+    [,(format "Set Scrollback Limit  -- Set vterm-max-scrollback")
      (customize-variable 'vterm-max-scrollback)
      :help "Set scrollback line limit, default 1000, max 100000 (vterm-max-scrollback)"
      ]
-    [,(format "Set vterm-kill-buffer-on-exit  -- Auto-Close on Exit")
+    [,(format "Auto-Close on Exit  -- Set vterm-kill-buffer-on-exit")
      (customize-variable 'vterm-kill-buffer-on-exit)
      :help "Toggle auto-close buffer when shell process terminates (vterm-kill-buffer-on-exit)"
      ]
-    [,(format "Set vterm-copy-exclude-prompt  -- Exclude Prompt on Copy")
+    [,(format "Exclude Prompt on Copy  -- Set vterm-copy-exclude-prompt")
      (customize-variable 'vterm-copy-exclude-prompt)
      :help "Exclude the shell prompt when copying lines in copy mode (vterm-copy-exclude-prompt)"
      ]
-    [,(format "Set vterm-environment  -- Set Environment Variables")
+    [,(format "Set Environment Variables  -- Set vterm-environment")
      (customize-variable 'vterm-environment)
      :help "Additional environment variables passed to the shell (vterm-environment)"
      ]
-    [,(format "Customize vterm group  -- All vterm Options")
+    [,(format "All vterm Options  -- Customize vterm group")
      (customize-group 'vterm)
      :help "Open the full vterm customization group"
      ]

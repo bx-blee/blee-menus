@@ -81,7 +81,7 @@ Intended for global menu bars — items here launch vterm from any buffer."
 
 (defun b:vterm:launch:menuItem:vterm|define ()
   (car `(
-         [,(format "vterm  -- Open Terminal in Current Window")
+         [,(format "Open Terminal in Current Window  -- vterm")
           (vterm)
           :help "Open a vterm terminal in the current window"
           ]
@@ -89,7 +89,7 @@ Intended for global menu bars — items here launch vterm from any buffer."
 
 (defun b:vterm:launch:menuItem:vterm-other-window|define ()
   (car `(
-         [,(format "vterm-other-window  -- Open Terminal in Other Window")
+         [,(format "Open Terminal in Other Window  -- vterm-other-window")
           (vterm-other-window)
           :help "Open a vterm terminal in another window"
           ]
@@ -100,27 +100,27 @@ Intended for global menu bars — items here launch vterm from any buffer."
 (defun b:vterm:launch:menuItem:config-submenu|define ()
   `(,(format "Configuration")
     :help "vterm configuration variables"
-    [,(format "Set vterm-shell  -- Change Shell Executable")
+    [,(format "Change Shell Executable  -- Set vterm-shell")
      (customize-variable 'vterm-shell)
      :help "Set the shell executable used by vterm (vterm-shell)"
      ]
-    [,(format "Set vterm-max-scrollback  -- Set Scrollback Limit")
+    [,(format "Set Scrollback Limit  -- Set vterm-max-scrollback")
      (customize-variable 'vterm-max-scrollback)
      :help "Set scrollback line limit, default 1000, max 100000 (vterm-max-scrollback)"
      ]
-    [,(format "Set vterm-kill-buffer-on-exit  -- Auto-Close on Exit")
+    [,(format "Auto-Close on Exit  -- Set vterm-kill-buffer-on-exit")
      (customize-variable 'vterm-kill-buffer-on-exit)
      :help "Toggle auto-close buffer when shell process terminates (vterm-kill-buffer-on-exit)"
      ]
-    [,(format "Set vterm-copy-exclude-prompt  -- Exclude Prompt on Copy")
+    [,(format "Exclude Prompt on Copy  -- Set vterm-copy-exclude-prompt")
      (customize-variable 'vterm-copy-exclude-prompt)
      :help "Exclude the shell prompt when copying lines in copy mode (vterm-copy-exclude-prompt)"
      ]
-    [,(format "Set vterm-environment  -- Set Environment Variables")
+    [,(format "Set Environment Variables  -- Set vterm-environment")
      (customize-variable 'vterm-environment)
      :help "Additional environment variables passed to the shell (vterm-environment)"
      ]
-    [,(format "Customize vterm group  -- All vterm Options")
+    [,(format "All vterm Options  -- Customize vterm group")
      (customize-group 'vterm)
      :help "Open the full vterm customization group"
      ]
