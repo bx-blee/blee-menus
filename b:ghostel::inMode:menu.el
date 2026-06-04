@@ -9,6 +9,26 @@
 ;;; appears on the menu bar when ghostel-mode is active and disappears
 ;;; when the buffer is not a ghostel buffer.
 
+;; (b:ghostel:inMode:menu:plugin|install modes:menu:global (s-- 6))
+(defun b:ghostel:inMode:menu:plugin|install (<menuLabel <menuDelimiter)
+  "Adds this as a submenu to menu labeled <menuLabel at specified delimiter <menuDelimiter.
+Intended for mode-specific menu bars — items here are available inside ghostel buffers."
+
+  (easy-menu-add-item
+   <menuLabel
+   nil
+   (b:ghostel:inMode:menu|define)
+   <menuDelimiter
+   )
+
+  (add-hook 'menu-bar-update-hook 'b:ghostel:inMode:menu|update-hook)
+  )
+
+(defun b:ghostel:inMode:menu|update-hook ()
+  "Added to menu-bar-update-hook. Runs on every menu bar invocation."
+  )
+
+
 ;;
 ;; (b:ghostel:inMode:menu|define)
 ;; (popup-menu (symbol-value (b:ghostel:inMode:menu|define)))
@@ -38,7 +58,8 @@ The menu appears automatically on the menu bar whenever ghostel-mode is active."
 	))
 
     ;;; (s-- 3) — Input Mode
-    (dolist (item '(b:ghostel:inMode:menuItem:semi-char-mode|define
+    (dolist (item '(b:ghostel:inMode:menuItem:show-current-mode|define
+                    b:ghostel:inMode:menuItem:semi-char-mode|define
                     b:ghostel:inMode:menuItem:char-mode|define
                     b:ghostel:inMode:menuItem:emacs-mode|define
                     b:ghostel:inMode:menuItem:line-mode|define
@@ -109,13 +130,23 @@ The menu appears automatically on the menu bar whenever ghostel-mode is active."
     'b:ghostel:inMode:menu
     ))
 
-(defun b:ghostel:inMode:menu|install ()
-  "Install the ghostel inMode menu. Call from ghostel-mode-hook."
-  (b:ghostel:inMode:menu|define))
-
-(add-hook 'ghostel-mode-hook #'b:ghostel:inMode:menu|install)
 
 ;;; Input Mode
+
+(defun b:ghostel:inMode:menuItem:show-current-mode|define ()
+  (car `(
+         [,(format "Show Current Input Mode")
+          (message "Current ghostel input mode: %s"
+                   (cond
+                    ((eq ghostel--input-mode 'semi-char) "semi-char-mode")
+                    ((eq ghostel--input-mode 'char)      "char-mode")
+                    ((eq ghostel--input-mode 'line)      "line-mode")
+                    ((eq ghostel--input-mode 'emacs)     "emacs-mode")
+                    ((eq ghostel--input-mode 'copy)      "copy-mode")
+                    (t (format "unexpected: %s" ghostel--input-mode))))
+          :help "Display the current ghostel input mode in the minibuffer"
+          ]
+         )))
 
 (defun b:ghostel:inMode:menuItem:semi-char-mode|define ()
   (car `(
