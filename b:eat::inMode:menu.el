@@ -9,6 +9,12 @@
 ;;; appears on the menu bar when eat-mode is active and disappears
 ;;; when the buffer is not an eat buffer.
 
+(defun b:eat:inMode:menu|install ()
+  "Install the eat inMode menu. Call from eat-mode-hook."
+  (b:eat:inMode:menu|define))
+
+(add-hook 'eat-mode-hook #'b:eat:inMode:menu|install)
+
 ;;
 ;; (b:eat:inMode:menu|define)
 ;; (popup-menu (symbol-value (b:eat:inMode:menu|define)))
@@ -91,11 +97,6 @@ The menu appears automatically on the menu bar whenever eat-mode is active."
     'b:eat:inMode:menu
     ))
 
-(defun b:eat:inMode:menu|install ()
-  "Install the eat inMode menu. Call from eat-mode-hook."
-  (b:eat:inMode:menu|define))
-
-(add-hook 'eat-mode-hook #'b:eat:inMode:menu|install)
 
 ;;; Input Mode
 

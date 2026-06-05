@@ -9,24 +9,21 @@
 ;;; appears on the menu bar when ghostel-mode is active and disappears
 ;;; when the buffer is not a ghostel buffer.
 
-;; (b:ghostel:inMode:menu:plugin|install modes:menu:global (s-- 6))
-(defun b:ghostel:inMode:menu:plugin|install (<menuLabel <menuDelimiter)
-  "Adds this as a submenu to menu labeled <menuLabel at specified delimiter <menuDelimiter.
-Intended for mode-specific menu bars — items here are available inside ghostel buffers."
+(add-hook 'ghostel-mode-hook #'b:ghostel:inMode:menu|install)
+(add-hook 'menu-bar-update-hook #'b:ghostel:inMode:menu|update-hook)
 
-  (easy-menu-add-item
-   <menuLabel
-   nil
-   (b:ghostel:inMode:menu|define)
-   <menuDelimiter
-   )
-
-  (add-hook 'menu-bar-update-hook 'b:ghostel:inMode:menu|update-hook)
-  )
+;;; b:ghostel:inMode:menu|install is added to ghostel-mode-hook, so the
+;;; menu is defined the first time a ghostel buffer is created — at which
+;;; point ghostel is loaded and ghostel-mode-map exists. This avoids
+;;; depending on load ordering or guessing the package's feature symbol.
 
 (defun b:ghostel:inMode:menu|update-hook ()
   "Added to menu-bar-update-hook. Runs on every menu bar invocation."
   )
+
+(defun b:ghostel:inMode:menu|install ()
+  "Install the ghostel inMode menu. Call from ghostel-mode-hook."
+  (b:ghostel:inMode:menu|define))
 
 
 ;;

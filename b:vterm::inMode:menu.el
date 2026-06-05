@@ -5,6 +5,12 @@
 (require 'easymenu)
 (require 'b:menu::panelAndHelp)
 
+(add-hook 'vterm-mode-hook #'b:vterm:inMode:menu|install)
+
+(defun b:vterm:inMode:menu|install ()
+  "Install the vterm inMode menu. Call from vterm-mode-hook."
+  (b:vterm:inMode:menu|define))
+
 ;;; The inMode menu is bound to vterm-mode-map so it automatically
 ;;; appears on the menu bar when vterm-mode is active and disappears
 ;;; when the buffer is not a vterm buffer.
@@ -88,12 +94,6 @@ The menu appears automatically on the menu bar whenever vterm-mode is active."
 
     'b:vterm:inMode:menu
     ))
-
-(defun b:vterm:inMode:menu|install ()
-  "Install the vterm inMode menu. Call from vterm-mode-hook."
-  (b:vterm:inMode:menu|define))
-
-(add-hook 'vterm-mode-hook #'b:vterm:inMode:menu|install)
 
 ;;; Copy Mode
 
