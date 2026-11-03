@@ -17,7 +17,7 @@ Intended for global menu bars — items here launch eat from any buffer."
    <menuDelimiter
    )
 
-  (add-hook 'menu-bar-update-hook 'b:eat:launch:menu|update-hook)
+  ;; Built once: nothing on menu-bar-update-hook (it runs on nearly every redisplay).
   )
 
 (defun b:eat:launch:menu|update-hook ()

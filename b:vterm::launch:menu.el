@@ -17,7 +17,7 @@ Intended for global menu bars — items here launch vterm from any buffer."
    <menuDelimiter
    )
 
-  (add-hook 'menu-bar-update-hook 'b:vterm:launch:menu|update-hook)
+  ;; Built once: nothing on menu-bar-update-hook (it runs on nearly every redisplay).
   )
 
 (defun b:vterm:launch:menu|update-hook ()

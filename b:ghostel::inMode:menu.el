@@ -10,7 +10,7 @@
 ;;; when the buffer is not a ghostel buffer.
 
 (add-hook 'ghostel-mode-hook #'b:ghostel:inMode:menu|install)
-(add-hook 'menu-bar-update-hook #'b:ghostel:inMode:menu|update-hook)
+;; Built once: nothing on menu-bar-update-hook (it runs on nearly every redisplay).
 
 ;;; b:ghostel:inMode:menu|install is added to ghostel-mode-hook, so the
 ;;; menu is defined the first time a ghostel buffer is created — at which
